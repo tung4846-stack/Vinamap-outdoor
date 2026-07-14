@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom styles for Leaflet to match our high-contrast design */
+.leaflet-container {
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Hide default Leaflet branding and controls we don't want */
+.leaflet-control-attribution {
+  font-size: 9px !important;
+  background: rgba(0, 0, 0, 0.75) !important;
+  color: #fff !important;
+}
+
+.leaflet-control-attribution a {
+  color: #fbbf24 !important; /* amber-400 */
+}
+
+/* Custom scrollbars for high-contrast dark elements */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827; /* gray-900 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151; /* gray-700 */
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b; /* amber-500 */
+}
+
+/* Pulser animation for GPS live dot */
+@keyframes pulse-gps {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.gps-pulse-ring {
+  border: 3px solid #ef4444;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  animation: pulse-gps 1.8s infinite ease-out;
+}
+

@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Master or Sub account profile",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["master", "sub", "regular"] },
+        "assignedRegion": { "type": "string" },
+        "masterEmail": { "type": "string" },
+        "syncCount": { "type": "integer" },
+        "lastSyncTime": { "type": "integer" }
+      },
+      "required": ["email", "role"]
+    },
+    "SubAccount": {
+      "title": "Sub Account",
+      "description": "Details of a sub-account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "displayName": { "type": "string" },
+        "assignedRegion": { "type": "string" },
+        "phone": { "type": "string" },
+        "createdAt": { "type": "integer" },
+        "masterEmail": { "type": "string" }
+      },
+      "required": ["id", "email", "password", "masterEmail"]
+    },
+    "Tracklog": {
+      "title": "Tracklog",
+      "description": "A saved GPS tracklog",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "points": { "type": "array" },
+        "timestamp": { "type": "integer" }
+      }
+    }
+  },
+  "firestore": {
+    "users/{email}": {
+      "schema": "UserProfile",
+      "description": "Master user document"
+    },
+    "users/{email}/data/tracklogs": {
+      "schema": { "type": "object", "properties": { "list": { "type": "array" } } },
+      "description": "Tracklogs list"
+    },
+    "users/{email}/data/subAccounts": {
+      "schema": { "type": "object", "properties": { "list": { "type": "array" } } },
+      "description": "Sub accounts managed by master"
+    },
+    "global_sub_accounts/{subEmail}": {
+      "schema": "SubAccount",
+      "description": "Global sub-account for login lookup"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "VINAMAP OUTDOOR",
+  "description": "Ứng dụng Trợ lý Bản đồ của chủ rừng dã ngoại chuyên dụng hỗ trợ nhập file KML/KMZ, ghi nhận tracklog GPS, giám sát ranh giới hộ nhận khoán lâm nghiệp và quản lý bản đồ ngoại tuyến (offline) với giao diện tương phản cao và chữ ký TUNGHT.NB.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
