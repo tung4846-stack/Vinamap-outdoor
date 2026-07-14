@@ -1,1 +1,40 @@
+name: Build iOS App (VINAMAP OUTDOOR)
 
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build-ios:
+    name: Build iOS IPA
+    runs-on: macos-latest 
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Web Assets
+        run: npm run build
+
+      - name: Sync Capacitor iOS
+        run: |
+          npx cap add ios || true
+          npx cap sync ios
+
+      - name: Build and Export IPA
+        run: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath $RUNNER_TEMP/vinamap.xcarchive \
+            archive
