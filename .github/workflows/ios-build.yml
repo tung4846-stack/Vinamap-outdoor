@@ -25,10 +25,15 @@ jobs:
       - name: Build Web Assets
         run: npm run build
 
-      - name: Sync Capacitor iOS
+    - name: Sync Capacitor iOS
         run: |
           npx cap add ios || true
           npx cap sync ios
+
+      - name: Install CocoaPods (Tạo Workspace)
+        run: |
+          cd ios/App
+          pod install
 
       - name: Build and Export IPA
         run: |
